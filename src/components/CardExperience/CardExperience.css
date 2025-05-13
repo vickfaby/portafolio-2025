@@ -1,0 +1,34 @@
+.card-experience {
+  background: #1e1e1e9c;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 100;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+  padding: 20px;
+  border: 1px solid #2e2e2e;
+}
+.card-experience-title{
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #fe9818;
+}
+.card-experience-cargo{
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 10px;
+  color: #fe9818;
+}
+.card-experience-description{
+  /* font-size: 0.8rem; */
+  font-weight: 200;
+  margin-bottom: 10px;
+  color: #FFFFFF;
+}
+
+
+

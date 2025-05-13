@@ -1,0 +1,59 @@
+.card-project {
+  background: #1e1e1e9c;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 100;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+  padding: 20px;
+  border: 1px solid #2e2e2e;
+}
+.card-project:hover {
+  background: #fe9818bd;
+  font-weight: 600;
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+.card-project:hover .card-project-description {
+  font-weight: 200;
+}
+
+.card-project-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #fe9818;
+}
+
+.card-project-logo {
+  width: 60%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+.card-project-description {
+  font-weight: 200;
+  margin-bottom: 10px;
+  color: #FFFFFF;
+}
+
+.card-project-link-container {
+  margin-top: auto;
+  padding-top: 0;
+}
+
+.card-project-link {
+  color: #fe9818;
+  text-decoration: none;
+  font-weight: 400;
+  transition: color 0.2s;
+}
+
+.card-project-link:hover {
+  color: #ffb74d;
+} 
