@@ -1,3 +1,14 @@
+/**
+ * App.jsx - Componente principal de la aplicación de portafolio
+ * 
+ * Este componente controla la estructura principal del portafolio, incluyendo:
+ * - Navegación
+ * - Sección de héroe con información personal
+ * - Sección de experiencia laboral
+ * - Sección de proyectos con modalidad de diálogo para ver detalles
+ * - Sección de contacto con enlaces a redes sociales
+ */
+
 import "./App.css";
 import CardProject from "./components/CardProject/CardProject.jsx";
 import CardExperience from "./components/CardExperience/CardExperience.jsx";
@@ -6,18 +17,32 @@ import ListarProyectos from "./application/ListarProyectos";
 import React, { useState } from "react";
 import ProjectInformation from "./components/ProjectInformation/ProjectInformation.jsx";
 
+// Inicialización del repositorio y obtención de la lista de proyectos
 const proyectoRepository = new ProyectoRepositoryMemoria();
 const listarProyectos = new ListarProyectos(proyectoRepository);
 const proyectos = listarProyectos.ejecutar();
 
+/**
+ * Componente principal App que estructura todo el portafolio
+ * @returns {JSX.Element} El componente App completo
+ */
 function App() {
+  // Estado para controlar el diálogo de detalles del proyecto
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
 
+  /**
+   * Abre el diálogo con la información del proyecto seleccionado
+   * @param {Object} proyecto - El proyecto seleccionado
+   */
   const handleOpenDialog = (proyecto) => {
     setSelectedProject(proyecto);
     setOpenDialog(true);
   };
+
+  /**
+   * Cierra el diálogo de información del proyecto
+   */
   const handleCloseDialog = () => {
     setOpenDialog(false);
     setSelectedProject(null);
@@ -25,6 +50,7 @@ function App() {
 
   return (
     <div className="app-root">
+      {/* Cabecera con navegación */}
       <header className="app-header">
         <nav className="app-nav">
           <h1 className="app-title">My Portfolio</h1>
@@ -42,7 +68,7 @@ function App() {
         </nav>
       </header>
       <main className="app-main">
-
+        {/* Sección de héroe con información personal */}
         <section className="hero-section">
           <div className="hero-title-container">
             <h1 className="hero-title">Vick</h1>
@@ -68,6 +94,7 @@ function App() {
           />
         </section>
 
+        {/* Sección de experiencia laboral */}
         <section className="experiencia-section" id="experiencia">
           <img
             src="./src/assets/background-3.jpg"
@@ -76,48 +103,22 @@ function App() {
           />
           <h1>Experiencia</h1>
           <div className="card-experience-container">
-            <CardExperience
-              empresa="Prizmo"
-              cargo="Desarrollador Full stack / UX-UI Designer"
-              fechaInicio="Octubre 2024"
-              fechaFin="Actualidad"
-              lenguajes="Angular, Node.js, Express, GraphQL, SQL, SCSS"
-              descripcion={[
-                "● Migración de arquitectura a hexagonal.",
-                "● Propuesta e implementación de nueva UI/UX para plataforma web, resultó en el entendimiento de un 80% del core de la plataforma a comparación del 20% de entendimiento con la UI anterior.",
-                "● Propuesta de cambios en UI móvil, acelerando el entendimiento del flujo de información para el usuario en un 40%.",
-                "● Uso de Cursor IDE para acelerar el desarrollo.",
-              ]}
-            />
-            <CardExperience
-              empresa="Prizmo"
-              cargo="full stack developer"
-              fechaInicio="2020-01-01"
-              fechaFin="2021-01-02"
-              lenguajes="Angular, Node, Postgres"
-              descripcion={[
-                "● Migración de arquitectura a hexagonal.",
-                "● Propuesta e implementación de nueva UI/UX para plataforma web, resultó en el entendimiento de un 80% del core de la plataforma a comparación del 20% de entendimiento con la UI anterior.",
-                "● Propuesta de cambios en UI móvil, acelerando el entendimiento del flujo de información para el usuario en un 40%.",
-                "● Uso de Cursor IDE para acelerar el desarrollo.",
-              ]}
-            />
-            <CardExperience
-              empresa="Prizmo"
-              cargo="full stack developer"
-              fechaInicio="2020-01-01"
-              fechaFin="2021-01-02"
-              lenguajes="Angular, Node, Postgres"
-              descripcion={[
-                "● Migración de arquitectura a hexagonal.",
-                "● Propuesta e implementación de nueva UI/UX para plataforma web, resultó en el entendimiento de un 80% del core de la plataforma a comparación del 20% de entendimiento con la UI anterior.",
-                "● Propuesta de cambios en UI móvil, acelerando el entendimiento del flujo de información para el usuario en un 40%.",
-                "● Uso de Cursor IDE para acelerar el desarrollo.",
-              ]}
-            />
+            {proyectos.map((proyecto, idx) => (
+              <CardExperience
+                key={idx}
+                empresa={proyecto.empresa}
+                cargo={proyecto.cargo}
+                fechaInicio={proyecto.fechaInicio}
+                fechaFin={proyecto.fechaFin}
+                lenguajes={proyecto.lenguajes}
+                descripcion={proyecto.aportes}
+                onClick={() => handleOpenDialog(proyecto.titulo)}
+              />
+            ))}
           </div>
         </section>
 
+        {/* Sección de proyectos */}
         <section className="intro-section" id="proyectos">
           <img
             src="./src/assets/background-4.jpg"
@@ -141,6 +142,7 @@ function App() {
           </div>
         </section>
 
+        {/* Sección de contacto */}
         <section className="contacto-section" id="contacto">
           <h2 className="contacto-title">Contacto</h2>
           <p className="contacto-desc">
@@ -149,7 +151,7 @@ function App() {
           </p>
           <div className="contacto-links">
             <a
-              href="https://www.linkedin.com/in/tuusuario"
+              href="https://www.linkedin.com/in/vickfaby"
               target="_blank"
               rel="noopener noreferrer"
               className="contacto-link"
@@ -185,7 +187,7 @@ function App() {
               </svg>
             </a>
             <a
-              href="https://github.com/tuusuario"
+              href="https://github.com/vickfaby"
               target="_blank"
               rel="noopener noreferrer"
               className="contacto-link"
@@ -206,7 +208,7 @@ function App() {
         </section>
 
       </main>
-      {/* Modal Dialog */}
+      {/* Modal de diálogo para mostrar detalles del proyecto */}
       {openDialog && selectedProject && (
         <div style={{
           position: 'fixed',
@@ -256,6 +258,7 @@ function App() {
           </div>
         </div>
       )}
+      {/* Pie de página */}
       <footer className="app-footer">
         <small>
           &copy; {new Date().getFullYear()} Vick. Todos los derechos reservados.
